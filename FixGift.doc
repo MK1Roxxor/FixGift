@@ -1,0 +1,62 @@
+             /                                                           
+       _____.__ _                                         .___.          
+      /    /_____________.  _________.__________.________ |   |________  
+  ___/____      /    ____|_/         |         /|        \|   ._      /  
+  \     \/      \    \     \    /    |    :___/¯|    \    \   |/     /   
+   \_____________\___/_____/___/_____|____|     |____|\_____________/    
+     -========================/===========|______\================-      
+    .---.----(*(             FIXGIFT 1.0                   )*)---.---.
+    `-./                                                          \.-'
+
+ INTRODUCTION
+ ------------
+
+ Back in 2000 Potion released "Gift", a great 64k intro. Depending on
+ the used OS and/or SetPatch version it can happen that the intro
+ freezes during startup. The reason for this is an incorrect call
+ of Draw() (a graphics library function) to draw the progress bar.
+ The code relies on register A1 to be unchanged, this however only
+ works by pure luck on some OS versions as A1 is a scratch register.
+ Usually Draw() modifies this register which in turn leads to a trashed
+ RastPort pointer which makes the intro freeze.
+
+
+ HOW
+ ---
+
+ FixGift simply patches the Draw() routine to preserve register A1 and
+ runs the intro. Upon exit all patches will be removed.
+ It should work with all versions of "Gift" as no binary changes are done
+ but I have only tested it with the final version.
+
+
+ REQUIREMENTS
+ ------------
+
+ As the intro requires OS V39+ FixGift will also require at least V39+.
+ FixGift will only run from CLI/Shell and has no Workbench support.
+
+
+ USAGE
+ -----
+
+ There is only one parameter and this is the path to the intro file.
+ Example: FixGift DATA:Demos/Gift.exe
+
+
+ SOURCE
+ ------
+
+ The full assembler source code is included in the FixGift archive.
+ It was created using ASM-Pro V1.16d but should be easy to use with
+ any other assembler as well. In case of questions just contact me.
+
+
+ CONTACT
+ -------
+
+ FixGift was created by StingRay/Scarab^Scoopex in March 2020, in case of
+ any problems you may drop me a mail at stingray_dsd@gmx.de
+
+
+ 
